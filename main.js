@@ -1,12 +1,6 @@
 import { app } from 'electron';
 import BrowserWindow from 'browser-window';
 
-const electron = require('electron');
-// Module to control application life.
-// const {app} = electron;
-// Module to create native browser window.
-//const {BrowserWindow} = electron;
-
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
@@ -57,7 +51,8 @@ app.on('activate', () => {
 //
 //
 
-const tm = require('./ssh-tunnel-manager');
+//const tm = require('./ssh-tunnel-manager');
+import { alertStuff } from './ssh-tunnel-manager';
 
 //const React = require('react');
 //const {BrowserWindow} = electron;
