@@ -52,7 +52,7 @@ app.on('activate', () => {
 //
 
 //const tm = require('./ssh-tunnel-manager');
-import { alertStuff } from './ssh-tunnel-manager';
+//import { alertStuff } from './ssh-tunnel-manager';
 
 //const React = require('react');
 //const {BrowserWindow} = electron;
@@ -62,3 +62,6 @@ import { createStore } from 'redux'
 //import todoApp from './reducers'
 //import App from './components/App'
 
+export function test() {
+  console.log('test export');
+}
