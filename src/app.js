@@ -4,13 +4,17 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 
 import sshTunnelApp from './reducers'
-import App from './components/app.js';
+import App from './components/app.js'
+import * as actions from './actions'
 
 let store = createStore(sshTunnelApp);
 
+store.dispatch(actions.addConnection('init one'));
+store.dispatch(actions.addConnection('init two'));
+
 render(
-  <provider store={store}>
+  <Provider store={store}>
     <App />
-  </provider>,
+  </Provider>,
   document.getElementById('app')
 )

@@ -3,7 +3,10 @@ const connections = (state = [], action) => {
     case 'ADD_CONNECTION':
       return [
         ...state,
-        null
+        {
+          id: action.id,
+          name: action.name
+        }
       ]
 
     default:
