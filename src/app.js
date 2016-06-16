@@ -1,6 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
 
+import sshTunnelApp from './reducers'
 import App from './components/app.js';
 
-ReactDOM.render(<App/>, document.getElementById('app'));
+let store = createStore(sshTunnelApp);
+
+render(
+  <provider store={store}>
+    <App />
+  </provider>,
+  document.getElementById('app')
+)
