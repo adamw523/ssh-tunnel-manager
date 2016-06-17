@@ -5,7 +5,10 @@ const connections = (state = [], action) => {
         ...state,
         {
           id: action.id,
-          name: action.name
+          server: action.server,
+          host: action.host,
+          localPort: action.localPort,
+          remotePort: action.remotePort
         }
       ]
 

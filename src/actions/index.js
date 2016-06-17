@@ -1,10 +1,13 @@
 let nextConnectionId = 100;
 
-export const addConnection = (name) => {
+export const addConnection = (server, host, localPort, remotePort) => {
   return {
     type: 'ADD_CONNECTION',
     id: nextConnectionId++,
-    name: name
+    server: server,
+    host: host,
+    localPort: localPort,
+    remotePort: remotePort
   }
 }
 

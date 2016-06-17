@@ -9,8 +9,10 @@ import * as actions from './actions'
 
 let store = createStore(sshTunnelApp);
 
-store.dispatch(actions.addConnection('init one'));
-store.dispatch(actions.addConnection('init two'));
+store.dispatch(actions.addConnection('devbox4.tbcn.ca', '10.4.4.4', 9988, 9988));
+store.dispatch(actions.addConnection('devbox4.tbcn.ca', '10.4.4.4', 7788, 7788));
+store.dispatch(actions.addConnection('devbox4.tbcn.ca', '10.4.4.4', 8888, 7888));
+store.dispatch(actions.addConnection('devbox4.tbcn.ca', '10.4.4.4', 8882, 8882));
 
 render(
   <Provider store={store}>
