@@ -4,7 +4,7 @@ module.exports = {
     path: __dirname,
     filename: "bundle.js"
   },
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   module: {
     loaders: [
       {
@@ -14,7 +14,18 @@ module.exports = {
         query: {
           presets: ['es2015', 'react']
         }
+      },
+
+      {
+        test: /\.json$/,
+        loader: "json-loader"
       }
     ]
+  },
+  externals: {
+    fs: '{}',
+    net: '{}',
+    dns: '{}',
+    child_process: '{}'
   }
 }

@@ -1,4 +1,6 @@
 import { app, BrowserWindow } from 'electron';
+import tunnel from 'tunnel-ssh';
+console.log('tunnel', tunnel);
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -6,7 +8,7 @@ let win;
 
 function createWindow() {
   // Create the browser window.
-  win = new BrowserWindow({width: 800, height: 600});
+  win = new BrowserWindow({width: 1200, height: 600});
 
   // and load the index.html of the app.
   win.loadURL(`file://${__dirname}/index.html`);
@@ -44,23 +46,3 @@ app.on('activate', () => {
     createWindow();
   }
 });
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
-//
-//
-
-//const tm = require('./ssh-tunnel-manager');
-//import { alertStuff } from './ssh-tunnel-manager';
-
-//const React = require('react');
-//const {BrowserWindow} = electron;
-import { render } from 'react-dom'
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-//import todoApp from './reducers'
-//import App from './components/App'
-
-export function test() {
-  console.log('test export');
-}

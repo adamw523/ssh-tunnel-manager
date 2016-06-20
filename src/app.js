@@ -4,8 +4,9 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 
 import sshTunnelApp from './reducers'
-import App from './components/app.js'
+import App from './components/app'
 import * as actions from './actions'
+import manager from './manager'
 
 let store = createStore(sshTunnelApp);
 
