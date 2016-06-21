@@ -1,4 +1,7 @@
-module.exports = {
+var webpack = require('webpack');
+var webpackTargetElectronRenderer = require('webpack-target-electron-renderer');
+
+config = {
   entry: "./src/app.js",
   output: {
     path: __dirname,
@@ -27,5 +30,12 @@ module.exports = {
     net: '{}',
     dns: '{}',
     child_process: '{}'
-  }
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+  ]
 }
+
+config.target = webpackTargetElectronRenderer(config);
+
+module.exports = config;

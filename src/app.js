@@ -8,6 +8,8 @@ import App from './components/app'
 import * as actions from './actions'
 import manager from './manager'
 
+console.log(manager);
+
 let store = createStore(sshTunnelApp);
 
 store.dispatch(actions.addConnection('devbox4.tbcn.ca', '10.4.4.4', 9988, 9988));

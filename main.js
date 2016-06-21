@@ -1,6 +1,8 @@
-import { app, BrowserWindow } from 'electron';
-import tunnel from 'tunnel-ssh';
-console.log('tunnel', tunnel);
+import { app, BrowserWindow, ipcMain } from 'electron';
+
+ipcMain.on('start-connection', (event, arg) => {
+  console.log('arg', arg);
+});
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -46,3 +48,4 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
