@@ -1,7 +1,8 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
+import * as mainConnections from './main-connections';
 
-ipcMain.on('start-connection', (event, arg) => {
-  console.log('arg', arg);
+ipcMain.on('start-connection', (event, connection) => {
+  mainConnections.connect(connection);
 });
 
 // Keep a global reference of the window object, if you don't, the window will
