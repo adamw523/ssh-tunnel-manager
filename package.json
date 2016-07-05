@@ -8,7 +8,7 @@
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
     "ssh2": "^0.5.0",
-    "tunnel-ssh": "^3.2.1-beta"
+    "tunnel-ssh": "^4.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.9.1",
