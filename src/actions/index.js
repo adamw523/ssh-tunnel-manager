@@ -24,3 +24,12 @@ export const disableConnection = (id) => {
     id: id
   }
 }
+
+export const updateConnectionStatus = (id, status, message) => {
+  return {
+    type: 'UPDATE_CONNECTION_STATUS',
+    id: id,
+    status: status,
+    message: message
+  }
+}

@@ -1,20 +1,18 @@
-import tunnel from 'tunnel-ssh'
+import fs from 'fs';
+import tunnel from 'tunnel-ssh';
 
 var connections = {};
 
-export function connect(connection) {
-  console.log('connecting', connection);
+export function connect(connection, listener) {
+  var key = fs.readFileSync('/Users/adam/.ssh/id_rsa').toString();
 
   if(!(connection.id in connections)) {
     let config = {
-      user: 'adam',
+      privateKey: key,
       host: connection['server'],
-      //port: 22,
-      agent: process.env.SSH_AUTH_SOCK,
       dstHost: connection['host'],
-      dstPort: connection['remotePort']
-      //localHost: '127.0.0.1',
-      //localPort: connection['localPort']
+      dstPort: connection['remotePort'],
+      localPort: connection['localPort']
     };
 
     connections[connection.id] = {
@@ -22,15 +20,22 @@ export function connect(connection) {
       config: config
     };
 
-    console.log('config', config);
-    tunnel.tunnel(config, function (error, server) {
+    var server = tunnel(config, (error, server) => {
       console.log('here-----');
       console.log('error', error);
       console.log('server', server);
+      connections[connection.id]['server'] = server;
+      listener.updateStatus(connection.id, 'connected');
     });
+
+    console.log('after server');
   } else {
   }
 
 
   return ["connection", connection];
+}
+
+export function currentConections() {
+  return connections;
 }

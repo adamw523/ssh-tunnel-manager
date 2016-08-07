@@ -12,8 +12,16 @@ const connections = (state = [], action) => {
         }
       ]
 
+    case 'UPDATE_CONNECTION_STATUS':
+      console.log('current state', state);
+
+      for (let connection of state) {
+        console.log('connection', connection);
+      }
+
+      return state;
     default:
-      return state
+      return state;
   }
 }
 

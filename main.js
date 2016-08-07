@@ -1,13 +1,20 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import * as mainConnections from './main-connections';
 
-ipcMain.on('start-connection', (event, connection) => {
-  mainConnections.connect(connection);
-});
-
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
+
+let listener = {
+  updateStatus: (id, status, message) => {
+    console.log('listener got', id, status, message);
+    win.webContents.send('update-connection-status', id, status, message);
+  }
+}
+
+ipcMain.on('start-connection', (event, connection) => {
+  mainConnections.connect(connection, listener);
+});
 
 function createWindow() {
   // Create the browser window.

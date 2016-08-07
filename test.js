@@ -6,4 +6,13 @@ var connections = [
 
 mainConnections.connect(connections[0]);
 
+console.log('here');
+
+setTimeout(() => {
+  let connections = mainConnections.currentConections();
+  console.log('connections:', mainConnections.currentConections());
+  console.log('connection:', connections['1']);
+  connections['1']['server'].close();
+}, 2000);
+
 
