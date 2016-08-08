@@ -16,6 +16,10 @@ ipcMain.on('start-connection', (event, connection) => {
   mainConnections.connect(connection, listener);
 });
 
+ipcMain.on('stop-connection', (event, connection) => {
+  mainConnections.disconnect(connection, listener);
+});
+
 function createWindow() {
   // Create the browser window.
   win = new BrowserWindow({width: 1200, height: 600});

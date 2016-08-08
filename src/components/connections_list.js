@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { startConnection } from './../manager';
+import { startConnection, stopConnection } from './../manager';
 
 const mapStateToProps = (state) => {
   return {
@@ -10,16 +10,24 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    connectConnection: startConnection
+    connectConnection: startConnection,
+    disconnectConnection: stopConnection
   }
 }
 
-const ConnectionsList = ({ connections, connectConnection }) => (
+const ConnectionsList = ({ connections, connectConnection, disconnectConnection }) => (
   <ul>
   {connections.map(connection =>
     <li key={connection.id}>
     {connection.localPort}:{connection.host}:{connection.remotePort} @ {connection.server}
-    <button onClick={() => connectConnection(connection)}>connect</button>
+    -
+    {connection.status}
+    -
+    { connection.status == 'connected' ?
+      <button onClick={() => disconnectConnection(connection)}>disconnect</button>
+    :
+      <button onClick={() => connectConnection(connection)}>connect</button>
+    }
     </li>
   )
   }

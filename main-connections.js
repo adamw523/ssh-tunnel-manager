@@ -12,7 +12,8 @@ export function connect(connection, listener) {
       host: connection['server'],
       dstHost: connection['host'],
       dstPort: connection['remotePort'],
-      localPort: connection['localPort']
+      localPort: connection['localPort'],
+      keepAlive: true
     };
 
     connections[connection.id] = {
@@ -21,11 +22,16 @@ export function connect(connection, listener) {
     };
 
     var server = tunnel(config, (error, server) => {
-      console.log('here-----');
+      console.log('here-----!');
       console.log('error', error);
       console.log('server', server);
       connections[connection.id]['server'] = server;
       listener.updateStatus(connection.id, 'connected');
+    });
+
+    server.on('error', (error) => {
+      console.log('got error', connection.id, error);
+      listener.updateStatus(connection.id, 'error');
     });
 
     console.log('after server');
@@ -34,6 +40,15 @@ export function connect(connection, listener) {
 
 
   return ["connection", connection];
+}
+
+export function disconnect(connection, listener) {
+  if((connection.id in connections)) {
+    let c = connections[connection.id];
+    c.server.close();
+    delete connections[connection.id];
+    listener.updateStatus(connection.id, 'disconnected');
+  }
 }
 
 export function currentConections() {

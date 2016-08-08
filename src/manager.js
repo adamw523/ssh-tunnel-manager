@@ -11,3 +11,8 @@ export function startConnection (connection) {
   ipcRenderer.send('start-connection', connection);
 }
 
+export function stopConnection (connection) {
+  console.log('manager.js stopConnection', connection);
+  ipcRenderer.send('stop-connection', connection);
+}
+

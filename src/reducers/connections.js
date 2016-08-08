@@ -8,18 +8,23 @@ const connections = (state = [], action) => {
           server: action.server,
           host: action.host,
           localPort: action.localPort,
-          remotePort: action.remotePort
+          remotePort: action.remotePort,
+          status: 'disconnected'
         }
       ]
 
     case 'UPDATE_CONNECTION_STATUS':
-      console.log('current state', state);
+      return state.map((connection, index) => {
+        if (connection.id == action.id) {
+          return Object.assign({}, connection, {
+            status: action.status,
+            message: action.message
+          });
+        }
 
-      for (let connection of state) {
-        console.log('connection', connection);
-      }
+        return connection;
+      });
 
-      return state;
     default:
       return state;
   }
