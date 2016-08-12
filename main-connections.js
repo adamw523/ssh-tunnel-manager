@@ -46,6 +46,7 @@ export function disconnect(connection, listener) {
   if((connection.id in connections)) {
     let c = connections[connection.id];
     c.server.close();
+    console.log("server is: ", c.server);
     delete connections[connection.id];
     listener.updateStatus(connection.id, 'disconnected');
   }
