@@ -9,6 +9,11 @@ let listener = {
   updateStatus: (id, status, message) => {
     console.log('listener got', id, status, message);
     win.webContents.send('update-connection-status', id, status, message);
+  },
+
+  gotError: (id, code, error) => {
+    console.log('listener got', id, code, error);
+    win.webContents.send('received-error', id, code, error);
   }
 }
 

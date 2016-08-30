@@ -21,6 +21,12 @@ ipcRenderer.on('update-connection-status', (event, id, status, message) => {
   store.dispatch(actions.updateConnectionStatus(id, status, message));
 });
 
+ipcRenderer.on('received-error', (event, id, code, error) => {
+  console.log('got received-error', event, 'id', id, 'code', code, 'error', error);
+  console.log(error.reason == "CONNECT_FAILED");
+  // store.dispatch(actions.updateConnectionStatus(id, status, message));
+});
+
 render(
   <Provider store={store}>
     <App />

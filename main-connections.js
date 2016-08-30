@@ -22,16 +22,18 @@ export function connect(connection, listener) {
     };
 
     var server = tunnel(config, (error, server) => {
-      console.log('here-----!');
-      console.log('error', error);
-      console.log('server', server);
+      // console.log('error', error);
+      // console.log('server', server);
       connections[connection.id]['server'] = server;
       listener.updateStatus(connection.id, 'connected');
     });
 
     server.on('error', (error) => {
       console.log('got error', connection.id, error);
-      listener.updateStatus(connection.id, 'error');
+      console.log('got error code', error.code, error);
+      console.log('got error code', error.code, typeof error);
+      // listener.updateStatus(connection.id, 'error');
+      listener.gotError(connection.id, error.code, error);
     });
 
     console.log('after server');
