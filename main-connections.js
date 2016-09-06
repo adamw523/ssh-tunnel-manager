@@ -1,5 +1,6 @@
 import fs from 'fs';
 import tunnel from 'tunnel-ssh';
+import Client from 'ssh2';
 
 var connections = {};
 
@@ -13,7 +14,10 @@ export function connect(connection, listener) {
       dstHost: connection['host'],
       dstPort: connection['remotePort'],
       localPort: connection['localPort'],
-      keepAlive: true
+      keepAlive: true,
+      debug: (msg) => {
+        console.log(msg);
+      }
     };
 
     connections[connection.id] = {
@@ -21,10 +25,10 @@ export function connect(connection, listener) {
       config: config
     };
 
-    var server = tunnel(config, (error, server) => {
+    var server = tunnel(config, (error, tnl) => {
       // console.log('error', error);
       // console.log('server', server);
-      connections[connection.id]['server'] = server;
+      connections[connection.id]['tnl'] = tnl;
       listener.updateStatus(connection.id, 'connected');
     });
 
@@ -47,8 +51,8 @@ export function connect(connection, listener) {
 export function disconnect(connection, listener) {
   if((connection.id in connections)) {
     let c = connections[connection.id];
-    c.server.close();
-    console.log("server is: ", c.server);
+    console.log("server is: ", c.tnl);
+    c.tnl.emit('close');
     delete connections[connection.id];
     listener.updateStatus(connection.id, 'disconnected');
   }
